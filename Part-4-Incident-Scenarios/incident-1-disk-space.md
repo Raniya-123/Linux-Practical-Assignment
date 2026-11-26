@@ -1,7 +1,7 @@
 
 
 
-### 1. Symptom
+1. Symptom
 
 The production server reported 95% disk utilisation, preventing users from uploading files.
 
