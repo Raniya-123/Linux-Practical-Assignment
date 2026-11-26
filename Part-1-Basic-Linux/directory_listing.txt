@@ -1,1 +1,20 @@
-Directory listing for Linux Practical Assignment.
+app-2026.log
+backup
+config
+directory_listing.txt
+logs
+scripts
+
+./backup:
+app.log
+application.log
+
+./config:
+
+./logs:
+access.log
+error.log
+security.log
+system.log
+
+./scripts:
