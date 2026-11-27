@@ -1,99 +1,93 @@
+Incident 4: Permission Denied 
 
-## Incident 4: Permission Denied
+38. Inspect the file's permissions and ownership
 
-### 38. Inspect the file's permissions and ownership
+The developer received a Permission denied error when trying to execute a deployment script. 
 
-The developer received a Permission denied error when trying to execute a deployment script.
+Since the original deployment script was not available in my lab, I created a practice file using: 
 
-Since the original deployment script was not available in my lab, I created a practice file using:
+touch deployment.sh 
 
-`touch deployment.sh`
+Used the following command to inspect its permissions and ownership: 
 
-Used the following command to inspect its permissions and ownership:
+ls -l deployment.sh 
 
-`ls -l deployment.sh`
+Initially, the owner and group had read and write permissions but no execute permission. This explained why the script could not be executed directly. 
 
-Initially, the owner and group had read and write permissions but no execute permission. This explained why the script could not be executed directly.
+39. The permission rwxr-xr-x represents the following: 
 
-### 39. Explain rwxr-xr-x in terms of owner, group and others
+Owner (rwx): Has read, write and execute permissions. 
 
-The permission `rwxr-xr-x` represents the following:
+Group (r-x): Has read and execute permissions but no write permission. 
 
-- **Owner (rwx):** Has read, write and execute permissions.
-- **Group (r-x):** Has read and execute permissions but no write permission.
-- **Others (r-x):** Have read and execute permissions but no write permission.
+Others (r-x): Have read and execute permissions but no write permission. 
 
-Here:
-- `r` means read.
-- `w` means write.
-- `x` means execute.
-- `-` means no permission.
+40.Used the following commands to grant execute permission to the owner and group: 
 
-### 40. Show how to grant execute permission to the appropriate user/group without making the file world-writable
+chmod u+x deployment.sh 
 
-Used the following commands to grant execute permission to the owner and group:
+This adds execute permission for the owner. 
 
-`chmod u+x deployment.sh`
+chmod g+x deployment.sh 
 
-This adds execute permission for the owner.
+This adds execute permission for the group. 
 
-`chmod g+x deployment.sh`
+These commands do not grant write permission to others, so the file is not made world writable. 
 
-This adds execute permission for the group.
+41.Difference between chmod and chown 
 
-These commands do not grant write permission to others, so the file is not made world-writable.
+chmod: Changes file or directory permissions, such as read, write and execute permissions. 
 
-### 41. Explain the difference between chmod and chown
+chown: Changes the ownership of a file or directory, including its owner and group. 
 
-- **chmod:** Changes file or directory permissions, such as read, write and execute permissions.
-- **chown:** Changes the ownership of a file or directory, including its owner and group.
+chmod u+x deployment.sh 
 
-Examples:
+Adds execute permission for the owner. 
 
-`chmod u+x deployment.sh`
+sudo chown ubuntu:ubuntu deployment.sh 
 
-Adds execute permission for the owner.
+Changes the owner and group to ubuntu. 
 
-`sudo chown ubuntu:ubuntu deployment.sh`
+42. Verify the change and explain what you would check if execution still fails 
 
-Changes the owner and group to ubuntu.
+Used the following command to verify the updated permissions: 
 
-### 42. Verify the change and explain what you would check if execution still fails
+ls -l deployment.sh 
 
-Used the following command to verify the updated permissions:
+The updated permissions were: 
 
-`ls -l deployment.sh`
+-rwxrwxr-- 
 
-The updated permissions were:
+This confirmed that the owner and group had read, write and execute permissions, while others had read-only permission. 
 
-`-rwxrwxr--`
+Executed the script using: 
 
-This confirmed that the owner and group had read, write and execute permissions, while others had read-only permission.
+./deployment.sh 
 
-Executed the script using:
+The practice script executed successfully. 
 
-`./deployment.sh`
+Also used: 
 
-The practice script executed successfully.
+head -n 1 deployment.sh 
 
-Also used:
+This confirmed that the Bash shebang was present: 
 
-`head -n 1 deployment.sh`
+#!/bin/bash 
 
-This confirmed that the Bash shebang was present:
+If execution still failed, I would check: 
 
-`#!/bin/bash`
+Whether the file has the correct execute permissions. 
 
-If execution still failed, I would check:
+Whether the user has permission to access the file and its parent directories. 
 
-- Whether the file has the correct execute permissions.
-- Whether the user has permission to access the file and its parent directories.
-- Whether the shebang points to a valid interpreter.
-- Whether the script has incorrect line endings.
-- Whether the filesystem is mounted with the `noexec` option.
+Whether the shebang points to a valid interpreter. 
 
-### Conclusion
+Whether the script has incorrect line endings. 
 
-The permission issue was resolved by granting execute permission to the owner and group using `chmod`.
+Whether the filesystem is mounted with the noexec option. 
 
-The updated permissions were verified, and the practice script executed successfully. No write permission was granted to others.
+Conclusion 
+
+The permission issue was resolved by granting execute permission to the owner and group using chmod. 
+
+The updated permissions were verified, and the practice script executed successfully. No write permission was granted to others. 
