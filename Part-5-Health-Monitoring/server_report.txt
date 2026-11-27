@@ -1,0 +1,24 @@
+Date and Time:
+Fri Nov 27 01:39:56 UTC 2026
+Hostname:
+ip-172-31-34-138
+Root Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       6.7G  2.3G  4.4G  35% /
+Available Memory:
+               total        used        free      shared  buff/cache   available
+Mem:           908Mi       327Mi       297Mi       2.7Mi       393Mi       581Mi
+Swap:             0B          0B          0B
+System Uptime:
+ 01:39:56 up  2:36,  1 user,  load average: 0.00, 0.00, 0.00
+Top 5 CPU-consuming Processes:
+    PID COMMAND         %CPU
+    953 ssm-agent-worke  0.0
+   1573 fwupd            0.0
+      1 systemd          0.0
+    615 amazon-ssm-agen  0.0
+   3705 kworker/0:2-eve  0.0
+Application Process Check:
+ALERT: testapp is not running
+Disk Usage Warning:
+Disk usage is below 80%
