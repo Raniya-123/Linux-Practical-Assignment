@@ -1,73 +1,105 @@
+ 
 
-## Incident 2: Application Login Failure
+Incident 2: Application Login Failure 
 
-### 28. Extract all ERROR messages and count them
+Symptoms 
 
-Used `grep "ERROR" application.log` to display all ERROR messages from the application log.
+The application experienced login failures. The application log contained multiple ERROR messages related to database connectivity and authentication. 
 
-Used `grep -c "ERROR" application.log` to count the total number of errors.
+ 
 
-The total number of ERROR entries found was **5**.
+Investigation 
 
-### 29. Extract timestamps and error messages only
+28: Extract and Count All ERROR Messages 
 
-Used `awk` to extract the timestamps and corresponding error messages from the log entries containing ERROR.
+Used the following commands to display and count the ERROR messages in the application log: 
 
-This helped identify the time and details of each error.
+grep "ERROR" application.log 
+grep -c "ERROR" application.log 
 
-### 30. Identify the first and last error entries
+The commands displayed all ERROR messages and counted the total number of errors. 
 
-Used `grep "ERROR" application.log | head -n 1` to identify the first error entry.
+ 
 
-Used `grep "ERROR" application.log | tail -n 1` to identify the last error entry.
+29: Extract Timestamps and Error Messages 
 
-The findings were:
+Used awk to extract the timestamps and corresponding error messages from log entries containing ERROR. 
 
-- First error: 10:03:20 – Invalid database credentials.
-- Last error: 10:10:40 – Database connection refused.
+This helped identify when each error occurred and what the error was. 
 
-Other errors included connection timeout and connection pool exhaustion.
+ 
 
-### 31. Create a separate report replacing ERROR with CRITICAL
+30: Identify the First and Last Error Entries 
 
-Used the `sed` command to replace ERROR with CRITICAL and saved the modified entries into a separate report file.
+Used the following commands: 
 
-Command used:
+grep "ERROR" application.log | head -n 1 
+grep "ERROR" application.log | tail -n 1 
 
-`sed 's/ERROR/CRITICAL/g' application.log > critical_report.log`
+The findings were: 
 
-This preserved the original application log.
+First error: 10:03:20 – Invalid database credentials. 
 
-The separate critical report displayed all five errors as CRITICAL.
+Last error: 10:10:40 – Database connection refused. 
 
-### 32. Write or adapt a script that alerts when the error count is greater than 3
+Other errors included connection timeout and connection pool exhaustion. 
 
-Created and executed a shell script to count ERROR entries in the log file.
+ 
 
-The script checks whether the error count is greater than 3.
+31: Create a Separate Report Replacing ERROR with CRITICAL 
 
-Since the log contained 5 errors, the script correctly displayed:
+Used the sed command to replace ERROR with CRITICAL and save the modified entries into a separate report file. 
 
-`WARNING: Too many errors detected`
+sed 's/ERROR/CRITICAL/g' application.log > critical_report.log 
 
-This confirmed that the alert condition was working correctly.
+This preserved the original application log. The separate report displayed all five errors as CRITICAL. 
 
-### 33. List further investigations to identify the root cause
+ 
 
-The following investigations could help identify the root cause:
+32: Create an Alert When the Error Count Is Greater Than 3 
 
-1. **Check database server status:** Verify whether the database server is running and accepting connections.
+Created and executed a shell script to count the ERROR entries in the log file. 
 
-2. **Verify database credentials:** Check whether the application is using the correct database username, password and authentication settings.
+The script checks whether the error count is greater than 3. Since the log contained 5 errors, it correctly displayed: 
 
-3. **Check network connectivity:** Test whether the application server can connect to the database server using the correct IP address and port.
+WARNING: Too many errors detected 
 
-4. **Investigate connection pool settings:** Check whether the maximum number of database connections has been reached.
+This confirmed that the alert condition was working correctly. 
 
-### Conclusion
+Findings 
 
-The application log contained five ERROR entries, including invalid database credentials, connection timeouts and a database connection refusal.
+The investigation identified the following: 
 
-These errors suggest possible database connectivity or configuration issues. However, the log alone does not prove that the database server is down.
+A total of 5 ERROR entries were found. 
 
-Further investigation of the database server, credentials, network connectivity and connection pool settings is required to confirm the actual root cause.
+The first error was related to invalid database credentials. 
+
+The last error showed that the database connection was refused. 
+
+Other errors included connection timeouts and connection pool exhaustion. 
+
+The alert script successfully detected that the error count exceeded 3. 
+
+Further Investigation 
+
+The following checks could help identify the actual root cause: 
+
+Check database server status: Verify whether the database server is running and accepting connections. 
+
+Verify database credentials: Check whether the application is using the correct database username, password and authentication settings. 
+
+Check network connectivity: Test whether the application server can connect to the database server using the correct IP address and port. 
+
+Investigate connection pool settings: Check whether the maximum number of database connections has been reached. 
+
+ 
+
+Conclusion 
+
+The application log contained five ERROR entries, including invalid database credentials, connection timeouts and a database connection refusal. 
+
+These errors suggest possible database connectivity or configuration issues. However, the log alone does not prove that the database server is down. 
+
+Further investigation of the database server, credentials, network connectivity and connection pool settings is required to confirm the actual root cause. 
+
+ 
