@@ -12,41 +12,9 @@ pwd
 sudo bash -c "ls -R > directory_listing.txt" 
 cat directory_listing.txt 
 
-2. Directory Listing 
-The following directories and files were created: 
-/opt/company/ 
-├── app-2026.log 
-├── backup/ 
-│   ├── app.log 
-│   └── application.log 
-├── config/ 
-├── logs/ 
-│   ├── access.log 
-│   ├── error.log 
-│   ├── security.log 
-│   └── system.log 
-└── scripts/ 
-
-app-2026.log 
-backup 
-config 
-directory_listing.txt 
-logs 
-scripts 
-./backup: 
-app.log 
-application.log 
-./config: 
-./logs: 
-access.log 
-error.log 
-security.log 
-system.log 
-./scripts: 
-
-3.Permission and Ownership Output 
+Permission and Ownership Output 
 Used ls -lR /opt/company to display permissions and ownership. 
-Example output: 
+output(beginning): 
 -rw-r--r-- 1 root root 0 app-2026.log 
 drwxr-xr-x 2 root root 4096 backup 
 drwxr-xr-x 2 root root 4096 config 
@@ -61,7 +29,7 @@ root root shows the owner and group.
 
 Ownership is root because the files and directories were created using sudo. 
 
-4. Verification Results 
+Verification Results 
 
 Confirmed /opt/company was created. 
 Confirmed all four subdirectories were created. 
@@ -74,7 +42,7 @@ Confirmed the directory listing was saved by checking directory_listing.txt.
 
 Error Encountered 
 The command sudo ls > directory_listing.txt returned Permission denied because the output redirection was handled by the normal user. 
-Solution: 
+Solution used:
 sudo bash -c "ls -R > directory_listing.txt" 
 The file was successfully created and checked using cat directory_listing.txt. 
 
